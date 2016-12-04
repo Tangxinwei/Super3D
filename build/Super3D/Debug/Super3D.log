@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(1189,5): warning MSB8012: TargetPath(G:\github\Super3D\build\Debug\Super3D.exe) does not match the Linker's OutputFile property value (G:\github\Super3D\bin\win32\Super3D.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+  LINK : program database G:\github\Super3D\build\Debug\Super3D.pdb missing; performing full link
+  Super3D.vcxproj -> G:\github\Super3D\build\Debug\Super3D.exe
+  Super3D.vcxproj -> G:\github\Super3D\build\Debug\Super3D.pdb (Full PDB)

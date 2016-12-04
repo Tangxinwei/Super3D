@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\math">
+      <UniqueIdentifier>{6a34b8d2-b12c-49f4-98bc-ca3c5e80980a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{ed198b87-a9a6-4385-ab69-7e9df25937f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{f7a7e6bb-fa38-4c5f-8196-5a5cb089577e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\window">
+      <UniqueIdentifier>{e0b6b70e-96e2-4391-b0cf-a4502a87d629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\window\win">
+      <UniqueIdentifier>{aa0ee25a-75dc-4fbf-8f87-00e0813f59cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\window">
+      <UniqueIdentifier>{cad42021-cf39-41eb-9f2b-9aafd6498fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\window\win">
+      <UniqueIdentifier>{abd4442a-5ab0-4c68-9164-3c950226e1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\render">
+      <UniqueIdentifier>{e3b00197-df1f-4a74-b4be-2bb8cb9f3844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\render\D3D11">
+      <UniqueIdentifier>{e982f1ca-ad30-43df-816d-6f7bbd88f951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\render">
+      <UniqueIdentifier>{8faed78a-f118-4c47-9856-243e3faf8779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\render\D3D11">
+      <UniqueIdentifier>{2060a1eb-4368-4b93-8262-4f6b1e9189b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\common">
+      <UniqueIdentifier>{c4639249-2c09-4938-b849-82843dd566b7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\SDObject.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\math\sdmath.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\IDevice.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\SD3DVertex.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\D3D11\D3D11Device.h">
+      <Filter>Header Files\render\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\window\CMainWindow.h">
+      <Filter>Header Files\window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\window\win\CMainWindowForWindows.h">
+      <Filter>Header Files\window\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\CCreationParams.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\CommonType.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\math\sdmath.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\SD3DVertex.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\IDevice.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\D3D11\D3D11Device.cpp">
+      <Filter>Source Files\render\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\window\win\CMainWindowForWindows.cpp">
+      <Filter>Source Files\window\win</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
