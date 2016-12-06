@@ -165,4 +165,20 @@ namespace render
 		mpImmediateContext->IASetIndexBuffer((ID3D11Buffer*)indexList, indexType, 0);
 		mpImmediateContext->DrawIndexed(indexCount, 0, 0);
 	}
+
+	IVertexBuff* D3D11Device::createVertexBuff(int byteLen, void* initData)
+	{
+		D3D11_BUFFER_DESC vertexDesc;
+		ZeroMemory(&vertexDesc, sizeof(vertexDesc));
+		vertexDesc.Usage = D3D11_USAGE_DEFAULT;
+		vertexDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		vertexDesc.ByteWidth = byteLen;
+		ID3D11Buffer* pBuff = NULL;
+		D3D11_SUBRESOURCE_DATA resourceData;
+		ZeroMemory(&resourceData, sizeof(resourceData));
+		resourceData.pSysMem = initData;
+		HRESULT result = mpD3dDevice->CreateBuffer(&vertexDesc, &resourceData, &pBuff);
+		HR_RETURN(result);
+		return new D3D11VertexBuff(byteLen, pBuff);
+	}
 }

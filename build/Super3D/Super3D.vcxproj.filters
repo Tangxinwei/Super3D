@@ -78,6 +78,15 @@
     <ClInclude Include="..\..\common\CommonType.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\render\IVertexBuff.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\IVertexIndexBuff.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\D3D11\D3D11VertexBuff.h">
+      <Filter>Header Files\render\D3D11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp">
@@ -97,6 +106,15 @@
     </ClCompile>
     <ClCompile Include="..\..\window\win\CMainWindowForWindows.cpp">
       <Filter>Source Files\window\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\IVertexBuff.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\IVertexIndexBuff.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\D3D11\D3D11VertexBuff.cpp">
+      <Filter>Source Files\render\D3D11</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

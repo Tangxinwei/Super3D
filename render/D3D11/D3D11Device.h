@@ -3,12 +3,24 @@
 #include <math\sdmath.h>
 #include <D3D11.h>
 #include <DxErr.h> 
+#include "D3D11VertexBuff.h"
 #ifndef HR
 	#define HR(x) {\
 		HRESULT hr = (x);\
 		if(FAILED(hr))\
 		{\
 			DXTrace(__FILE__, (DWORD)__LINE__, hr, L#x, true);\
+		}\
+	}
+#endif
+
+#ifndef HR_RETURN
+#define HR_RETURN(x){\
+		HRESULT hr = (x);\
+		if(FAILED(hr))\
+		{\
+			DXTrace(__FILE__, (DWORD)__LINE__, hr, L#x, true);\
+			return NULL;\
 		}\
 	}
 #endif
@@ -34,6 +46,7 @@ namespace render
 		virtual bool initDevice(CCreationParams& params);
 		virtual bool beginScene(bool backBuffer = true, bool zBuffer = true, const sdmath::vec4& color = sdmath::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 		virtual void endScene();
+		virtual IVertexBuff* createVertexBuff(int byteLen, void* initData);
 		virtual void drawVertexPrimitiveList(const void* vertices, uint32_t vertexCount, \
 			const void* indexList, uint32_t primCount, E_VERTEX_TYPE vType = EVT_STANDARD, \
 			E_PRIMITIVE_TYPE pType = EPT_TRIANGLES, E_INDEX_TYPE iType = EIT_16BIT);

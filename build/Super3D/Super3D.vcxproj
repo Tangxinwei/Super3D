@@ -155,7 +155,10 @@
     <ClInclude Include="..\..\common\SDObject.h" />
     <ClInclude Include="..\..\math\sdmath.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11Device.h" />
+    <ClInclude Include="..\..\render\D3D11\D3D11VertexBuff.h" />
     <ClInclude Include="..\..\render\IDevice.h" />
+    <ClInclude Include="..\..\render\IVertexBuff.h" />
+    <ClInclude Include="..\..\render\IVertexIndexBuff.h" />
     <ClInclude Include="..\..\render\SD3DVertex.h" />
     <ClInclude Include="..\..\window\CMainWindow.h" />
     <ClInclude Include="..\..\window\win\CMainWindowForWindows.h" />
@@ -163,7 +166,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp" />
     <ClCompile Include="..\..\render\D3D11\D3D11Device.cpp" />
+    <ClCompile Include="..\..\render\D3D11\D3D11VertexBuff.cpp" />
     <ClCompile Include="..\..\render\IDevice.cpp" />
+    <ClCompile Include="..\..\render\IVertexBuff.cpp" />
+    <ClCompile Include="..\..\render\IVertexIndexBuff.cpp" />
     <ClCompile Include="..\..\render\SD3DVertex.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\window\win\CMainWindowForWindows.cpp" />

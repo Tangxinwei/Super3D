@@ -5,7 +5,6 @@ using namespace sdmath;
 #include <common\CommonType.h>
 namespace render
 {
-
 	class SD3DVertex
 	{
 	public:

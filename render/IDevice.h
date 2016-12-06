@@ -4,12 +4,13 @@
 #include <common\CommonType.h>
 #include "SD3DVertex.h"
 #include <math\sdmath.h>
-
+#include "IVertexBuff.h"
 namespace render
 {
 	class IDevice : public SDObject
 	{
 		public:
+			virtual IVertexBuff* createVertexBuff(int byteLen, void* initData) = 0;
 			virtual ~IDevice();
 			virtual bool initDevice(CCreationParams& params) = 0;
 			virtual void onResize(CCreationParams& params) = 0;
