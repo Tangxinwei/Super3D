@@ -13,7 +13,7 @@ namespace render
 	protected:
 		ID3D11Buffer* pBuff;
 	public:
-		D3D11VertexBuff(uint32_t len, ID3D11Buffer* b): IVertexBuff(len), pBuff(b){}
+		D3D11VertexBuff(uint32_t len, ID3D11Buffer* b, E_VERTEX_TYPE vType): IVertexBuff(len, vType), pBuff(b){}
 		virtual ~D3D11VertexBuff(){ SafeRelease(pBuff); }
 	};
 }

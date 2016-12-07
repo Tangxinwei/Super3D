@@ -137,36 +137,7 @@ namespace render
 		mpSwapChain->Present(0, 0);
 	}
 
-	void D3D11Device::drawVertexPrimitiveList(const void* vertices, uint32_t vertexCount, \
-		const void* indexList, uint32_t indexCount, E_VERTEX_TYPE vType, E_PRIMITIVE_TYPE pType, E_INDEX_TYPE iType)
-	{
-		draw2D3DVertexPrimitiveList(vertices, vertexCount, indexList, indexCount, vType, pType, iType, true);
-	}
-
-	void D3D11Device::draw2D3DVertexPrimitiveList(const void* vertices, uint32_t vertexCount, \
-		const void* indexList, uint32_t indexCount, E_VERTEX_TYPE vType, E_PRIMITIVE_TYPE pType, \
-		E_INDEX_TYPE iType, bool is3D)
-	{
-		DXGI_FORMAT indexType = DXGI_FORMAT_UNKNOWN;
-		switch (iType)
-		{
-			case EIT_16BIT:
-				indexType = DXGI_FORMAT_R16_UINT;
-		}
-		D3D11_PRIMITIVE_TOPOLOGY pD3DType = D3D11_PRIMITIVE_TOPOLOGY_UNDEFINED;
-		switch (pType)
-		{
-			case EPT_TRIANGLES:
-				pD3DType = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-		}
-		mpImmediateContext->IASetPrimitiveTopology(pD3DType);
-		UINT stride = getVertexSizeByType(vType), offset;
-	//	mpImmediateContext->IASetVertexBuffers(0, vertexCount, (ID3D11Buffer*)vertices, &stride, &offset);
-		mpImmediateContext->IASetIndexBuffer((ID3D11Buffer*)indexList, indexType, 0);
-		mpImmediateContext->DrawIndexed(indexCount, 0, 0);
-	}
-
-	IVertexBuff* D3D11Device::createVertexBuff(int byteLen, void* initData)
+	IVertexBuff* D3D11Device::createVertexBuff(int byteLen, void* initData, E_VERTEX_TYPE vType)
 	{
 		D3D11_BUFFER_DESC vertexDesc;
 		ZeroMemory(&vertexDesc, sizeof(vertexDesc));
@@ -179,6 +150,22 @@ namespace render
 		resourceData.pSysMem = initData;
 		HRESULT result = mpD3dDevice->CreateBuffer(&vertexDesc, &resourceData, &pBuff);
 		HR_RETURN(result);
-		return new D3D11VertexBuff(byteLen, pBuff);
+		return new D3D11VertexBuff(byteLen, pBuff, vType);
+	}
+
+	IVertexIndexBuff* D3D11Device::createVertexIndexBuff(int byteLen, void* initData, E_INDEX_TYPE iType)
+	{
+		D3D11_BUFFER_DESC vertexDesc;
+		ZeroMemory(&vertexDesc, sizeof(vertexDesc));
+		vertexDesc.Usage = D3D11_USAGE_DEFAULT;
+		vertexDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		vertexDesc.ByteWidth = byteLen;
+		ID3D11Buffer* pBuff = NULL;
+		D3D11_SUBRESOURCE_DATA resourceData;
+		ZeroMemory(&resourceData, sizeof(resourceData));
+		resourceData.pSysMem = initData;
+		HRESULT result = mpD3dDevice->CreateBuffer(&vertexDesc, &resourceData, &pBuff);
+		HR_RETURN(result);
+		return new D3D11VertexIndexBuff(byteLen, pBuff, iType);
 	}
 }

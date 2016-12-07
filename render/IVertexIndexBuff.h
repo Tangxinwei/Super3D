@@ -11,9 +11,11 @@ namespace render
 	{
 	protected:
 		uint32_t byteLen;
+		E_INDEX_TYPE iType;
 	public:
-		IVertexIndexBuff(uint32_t len) : byteLen(len) {}
+		IVertexIndexBuff(uint32_t len, E_INDEX_TYPE i) : byteLen(len), iType(i), SDObject() {}
 		virtual ~IVertexIndexBuff(){}
+		E_INDEX_TYPE getIndexType() { return iType; }
 	};
 }
 

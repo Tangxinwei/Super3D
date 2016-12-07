@@ -156,6 +156,7 @@
     <ClInclude Include="..\..\math\sdmath.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11Device.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11VertexBuff.h" />
+    <ClInclude Include="..\..\render\D3D11\D3D11VertexIndexBuff.h" />
     <ClInclude Include="..\..\render\IDevice.h" />
     <ClInclude Include="..\..\render\IVertexBuff.h" />
     <ClInclude Include="..\..\render\IVertexIndexBuff.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="..\..\math\sdmath.cpp" />
     <ClCompile Include="..\..\render\D3D11\D3D11Device.cpp" />
     <ClCompile Include="..\..\render\D3D11\D3D11VertexBuff.cpp" />
+    <ClCompile Include="..\..\render\D3D11\D3D11VertexIndexBuff.cpp" />
     <ClCompile Include="..\..\render\IDevice.cpp" />
     <ClCompile Include="..\..\render\IVertexBuff.cpp" />
     <ClCompile Include="..\..\render\IVertexIndexBuff.cpp" />
