@@ -1,0 +1,5 @@
+bin/
+bin/win32/
+build/Debug/
+build/Super3D.VC.db
+build/Super3D/Debug/
