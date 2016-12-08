@@ -28,7 +28,7 @@ namespace scene
 		IModel* createModel(SimpleVertex* vertex, int vertexCount, uint16_t* index, int indexCount);
 		IScene* createScene();
 		template <class T>
-		T addToGcList(T object)
+		T* addToGcList(T* object)
 		{
 			gcList.push_back(object);
 			return object;
