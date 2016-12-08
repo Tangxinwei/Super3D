@@ -6,7 +6,7 @@
 namespace render 
 {
 	enum DeviceType { DT_DX11, };
-	enum E_VERTEX_TYPE { EVT_STANDARD, };
+	enum E_VERTEX_TYPE { EVT_STANDARD, EVT_SIMPLE};
 	enum E_PRIMITIVE_TYPE { EPT_TRIANGLES, };
 	enum E_INDEX_TYPE { EIT_16BIT, };
 }

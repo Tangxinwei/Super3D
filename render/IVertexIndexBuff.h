@@ -12,10 +12,13 @@ namespace render
 	protected:
 		uint32_t byteLen;
 		E_INDEX_TYPE iType;
+		uint32_t count;
 	public:
-		IVertexIndexBuff(uint32_t len, E_INDEX_TYPE i) : byteLen(len), iType(i), SDObject() {}
+		IVertexIndexBuff(uint32_t len, E_INDEX_TYPE i, uint32_t c) : byteLen(len), iType(i), count(c), SDObject() {}
 		virtual ~IVertexIndexBuff(){}
+		virtual void* getBuff() = 0;
 		E_INDEX_TYPE getIndexType() { return iType; }
+		uint32_t getIndexCount() { return count; }
 	};
 }
 

@@ -5,6 +5,18 @@ using namespace sdmath;
 #include <common\CommonType.h>
 namespace render
 {
+	class SimpleVertex
+	{
+	public:
+		vec3 position;
+		vec4 color;
+		SimpleVertex(vec3& p, vec4& c) : position(p), color(c){}
+		SimpleVertex interpolate(const SimpleVertex& sv, const float d)
+		{
+			return SimpleVertex(sdmath::interpolate(position, sv.position, d), \
+				sdmath::interpolate(color, sv.color, d));
+		}
+	};
 	class SD3DVertex
 	{
 	public:

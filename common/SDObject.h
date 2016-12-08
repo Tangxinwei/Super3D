@@ -6,8 +6,9 @@ private:
 	int referenceCount;
 
 public:
-	SDObject():referenceCount(0){}
+	SDObject():referenceCount(1){}
 	void retain() { referenceCount++; }
+	bool Release() { return release(); }
 	bool release()
 	{
 		referenceCount--;

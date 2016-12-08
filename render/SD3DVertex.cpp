@@ -8,6 +8,8 @@ namespace render
 		{
 		case EVT_STANDARD:
 			return sizeof(SD3DVertex);
+		case EVT_SIMPLE:
+			return sizeof(SimpleVertex);
 		}
 		return 0;
 	}

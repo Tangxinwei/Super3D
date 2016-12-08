@@ -49,5 +49,6 @@ namespace render
 		virtual void endScene();
 		virtual IVertexBuff* createVertexBuff(int byteLen, void* initData, E_VERTEX_TYPE vType);
 		virtual IVertexIndexBuff* createVertexIndexBuff(int byteLen, void* initData, E_INDEX_TYPE iType);
+		virtual void drawIndexedVertexTriangles(IVertexBuff* pVertex, IVertexIndexBuff* pIndex);
 	};
 }

@@ -13,8 +13,10 @@ namespace render
 	protected:
 		ID3D11Buffer* pBuff;
 	public:
-		D3D11VertexIndexBuff(uint32_t len, ID3D11Buffer* b, E_INDEX_TYPE iType): IVertexIndexBuff(len, iType), pBuff(b){}
+		D3D11VertexIndexBuff(uint32_t len, ID3D11Buffer* b, E_INDEX_TYPE iType, uint32_t count): \
+			IVertexIndexBuff(len, iType, count), pBuff(b){}
 		virtual ~D3D11VertexIndexBuff(){ SafeRelease(pBuff); }
+		virtual void* getBuff() { return pBuff; }
 	};
 }
 

@@ -161,6 +161,10 @@
     <ClInclude Include="..\..\render\IVertexBuff.h" />
     <ClInclude Include="..\..\render\IVertexIndexBuff.h" />
     <ClInclude Include="..\..\render\SD3DVertex.h" />
+    <ClInclude Include="..\..\scene\IEntity.h" />
+    <ClInclude Include="..\..\scene\IModel.h" />
+    <ClInclude Include="..\..\scene\IScene.h" />
+    <ClInclude Include="..\..\scene\ISceneMgr.h" />
     <ClInclude Include="..\..\window\CMainWindow.h" />
     <ClInclude Include="..\..\window\win\CMainWindowForWindows.h" />
   </ItemGroup>
@@ -173,7 +177,12 @@
     <ClCompile Include="..\..\render\IVertexBuff.cpp" />
     <ClCompile Include="..\..\render\IVertexIndexBuff.cpp" />
     <ClCompile Include="..\..\render\SD3DVertex.cpp" />
+    <ClCompile Include="..\..\scene\IEntity.cpp" />
+    <ClCompile Include="..\..\scene\IModel.cpp" />
+    <ClCompile Include="..\..\scene\IScene.cpp" />
+    <ClCompile Include="..\..\scene\ISceneMgr.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\window\CMainWindow.cpp" />
     <ClCompile Include="..\..\window\win\CMainWindowForWindows.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

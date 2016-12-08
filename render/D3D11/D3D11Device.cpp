@@ -125,8 +125,9 @@ namespace render
 	{
 		if (backBuffer)
 		{
-			float a[4] = { 0.0f, 0.125f, 0.3f, 1.0f };
-			mpImmediateContext->ClearRenderTargetView(mpRenderTargetView, a);
+			sdmath::vec4 a(0, 0, 0, 1);
+			//float a[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+			mpImmediateContext->ClearRenderTargetView(mpRenderTargetView, (const float*)&a);
 		}
 		if (zBuffer)
 			mpImmediateContext->ClearDepthStencilView(mpDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 0, 0);
@@ -150,7 +151,7 @@ namespace render
 		resourceData.pSysMem = initData;
 		HRESULT result = mpD3dDevice->CreateBuffer(&vertexDesc, &resourceData, &pBuff);
 		HR_RETURN(result);
-		return new D3D11VertexBuff(byteLen, pBuff, vType);
+		return new D3D11VertexBuff(byteLen, pBuff, vType, byteLen / getVertexSizeByType(vType));
 	}
 
 	IVertexIndexBuff* D3D11Device::createVertexIndexBuff(int byteLen, void* initData, E_INDEX_TYPE iType)
@@ -166,6 +167,31 @@ namespace render
 		resourceData.pSysMem = initData;
 		HRESULT result = mpD3dDevice->CreateBuffer(&vertexDesc, &resourceData, &pBuff);
 		HR_RETURN(result);
-		return new D3D11VertexIndexBuff(byteLen, pBuff, iType);
+		uint32_t count = 0;
+		switch (iType)
+		{
+		case EIT_16BIT:
+			count = byteLen >> 1;
+		}
+		return new D3D11VertexIndexBuff(byteLen, pBuff, iType, count);
+	}
+
+	void D3D11Device::drawIndexedVertexTriangles(IVertexBuff* pVertex, IVertexIndexBuff* pIndex)
+	{
+		mpImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		ID3D11Buffer* vertexBuff = (ID3D11Buffer*)pVertex->getBuff();
+		UINT stride = getVertexSizeByType(pVertex->getVertexType()), offset = 0;
+		mpImmediateContext->IASetVertexBuffers(0, 1, &vertexBuff, &stride, &offset);
+		
+		ID3D11Buffer* indexBuff = (ID3D11Buffer*)pIndex->getBuff();
+		DXGI_FORMAT indexType = DXGI_FORMAT_UNKNOWN;
+		switch (pIndex->getIndexType())
+		{
+		case EIT_16BIT:
+			indexType = DXGI_FORMAT_R16_UINT;
+		}
+		mpImmediateContext->IASetIndexBuffer(indexBuff, indexType, 0);
+		mpImmediateContext->DrawIndexed(pIndex->getIndexCount(), 0, 0);
 	}
 }

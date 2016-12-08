@@ -49,6 +49,12 @@
     <Filter Include="Header Files\common">
       <UniqueIdentifier>{c4639249-2c09-4938-b849-82843dd566b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\scene">
+      <UniqueIdentifier>{271f7f3a-b192-411d-821a-d34a08a8e715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\scene">
+      <UniqueIdentifier>{dff54d73-0bc9-4fb8-acef-6f2eec6b9b8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\SDObject.h">
@@ -90,6 +96,18 @@
     <ClInclude Include="..\..\render\D3D11\D3D11VertexIndexBuff.h">
       <Filter>Header Files\render\D3D11</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\scene\ISceneMgr.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scene\IModel.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scene\IScene.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scene\IEntity.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp">
@@ -121,6 +139,21 @@
     </ClCompile>
     <ClCompile Include="..\..\render\D3D11\D3D11VertexIndexBuff.cpp">
       <Filter>Source Files\render\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\scene\ISceneMgr.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\scene\IModel.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\window\CMainWindow.cpp">
+      <Filter>Source Files\window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\scene\IScene.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\scene\IEntity.cpp">
+      <Filter>Source Files\scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

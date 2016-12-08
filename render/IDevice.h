@@ -19,6 +19,7 @@ namespace render
 			virtual bool beginScene(bool backBuffer = true, bool zBuffer = true,\
 				const sdmath::vec4& color = sdmath::vec4(0.0f, 0.0f, 0.0f, 1.0f)) = 0;
 			virtual void endScene() = 0;
+			virtual void drawIndexedVertexTriangles(IVertexBuff* pVertex, IVertexIndexBuff* pIndex) = 0;
 	};
 
 	IDevice* createDevice(CCreationParams& params);
