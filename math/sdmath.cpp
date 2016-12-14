@@ -14,8 +14,8 @@ namespace sdmath
 		return glm::translate(mat, v); 
 	}
 
-	mat4 rotate(mat4& mat, float& angle, vec3& axis) 
-	{ 
+	mat4 rotate(mat4& mat, float& angle, vec3& axis)
+	{
 		return glm::rotate(mat, angle, axis); 
 	}
 

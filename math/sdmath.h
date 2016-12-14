@@ -29,10 +29,10 @@ namespace sdmath
 		    v[2][0]  v[2][1]  v[2][2]  v[2][3]
 		    v[3][0]  v[3][1]  v[3][2]  v[3][3]
 	*/
-	inline mat4 transpose(mat4& mat);
-	inline mat4 translate(mat4& mat, vec3& v);
-	inline mat4 rotate(mat4& mat, float& angle, vec3& axis);
-	inline mat4 inverse(mat4& mat);
+	mat4 transpose(mat4& mat);
+	mat4 translate(mat4& mat, vec3& v);
+	mat4 rotate(mat4& mat, float& angle, vec3& axis);
+	mat4 inverse(mat4& mat);
 
 	template<class T>
     inline T interpolate(const T& t1, const T& t2, float d)

@@ -108,6 +108,12 @@
     <ClInclude Include="..\..\scene\IEntity.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\render\IPixelShader.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\IVertexShader.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp">
@@ -154,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="..\..\scene\IEntity.cpp">
       <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\IPixelShader.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\IVertexShader.cpp">
+      <Filter>Source Files\render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

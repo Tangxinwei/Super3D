@@ -1,5 +1,4 @@
 #include "IModel.h"
-
 namespace scene
 {
 	void IEntity::setPosition(float x, float y, float z)

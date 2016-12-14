@@ -158,8 +158,10 @@
     <ClInclude Include="..\..\render\D3D11\D3D11VertexBuff.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11VertexIndexBuff.h" />
     <ClInclude Include="..\..\render\IDevice.h" />
+    <ClInclude Include="..\..\render\IPixelShader.h" />
     <ClInclude Include="..\..\render\IVertexBuff.h" />
     <ClInclude Include="..\..\render\IVertexIndexBuff.h" />
+    <ClInclude Include="..\..\render\IVertexShader.h" />
     <ClInclude Include="..\..\render\SD3DVertex.h" />
     <ClInclude Include="..\..\scene\IEntity.h" />
     <ClInclude Include="..\..\scene\IModel.h" />
@@ -174,8 +176,10 @@
     <ClCompile Include="..\..\render\D3D11\D3D11VertexBuff.cpp" />
     <ClCompile Include="..\..\render\D3D11\D3D11VertexIndexBuff.cpp" />
     <ClCompile Include="..\..\render\IDevice.cpp" />
+    <ClCompile Include="..\..\render\IPixelShader.cpp" />
     <ClCompile Include="..\..\render\IVertexBuff.cpp" />
     <ClCompile Include="..\..\render\IVertexIndexBuff.cpp" />
+    <ClCompile Include="..\..\render\IVertexShader.cpp" />
     <ClCompile Include="..\..\render\SD3DVertex.cpp" />
     <ClCompile Include="..\..\scene\IEntity.cpp" />
     <ClCompile Include="..\..\scene\IModel.cpp" />
