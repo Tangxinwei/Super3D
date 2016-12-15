@@ -27,6 +27,7 @@ namespace scene
 		void rotateZ(float angle) { rotate(sdmath::vec3(0, 0, 1), angle); }
 
 		void translate(float x, float y, float z);
+		virtual ~IEntity(){}
 	}; 
 }
 

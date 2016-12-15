@@ -6,9 +6,13 @@ private:
 	int referenceCount;
 
 public:
+	virtual ~SDObject() {}
 	SDObject():referenceCount(1){}
 	void retain() { referenceCount++; }
-	bool Release() { return release(); }
+	bool Release() 
+	{
+		return release();
+	}
 	bool release()
 	{
 		referenceCount--;

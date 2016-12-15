@@ -18,6 +18,7 @@ namespace render
 		E_VERTEX_TYPE getVertexType() { return vType; }
 		virtual void* getBuff() = 0;
 		uint32_t getVertexCount() { return count; }
+		virtual ~IVertexBuff() {}
 	};
 }
 
