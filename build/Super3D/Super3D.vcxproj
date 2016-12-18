@@ -130,6 +130,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;d3dx11.lib;dxerr.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(ProjectDir)..\..\bin\win32\$(TargetName)$(TargetExt)</OutputFile>
+      <StackReserveSize>
+      </StackReserveSize>
+      <StackCommitSize>
+      </StackCommitSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,8 +159,10 @@
     <ClInclude Include="..\..\common\SDObject.h" />
     <ClInclude Include="..\..\math\sdmath.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11Device.h" />
+    <ClInclude Include="..\..\render\D3D11\D3D11PixelShader.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11VertexBuff.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11VertexIndexBuff.h" />
+    <ClInclude Include="..\..\render\D3D11\D3D11VertexShader.h" />
     <ClInclude Include="..\..\render\IDevice.h" />
     <ClInclude Include="..\..\render\IPixelShader.h" />
     <ClInclude Include="..\..\render\IVertexBuff.h" />

@@ -194,4 +194,71 @@ namespace render
 		mpImmediateContext->IASetIndexBuffer(indexBuff, indexType, 0);
 		mpImmediateContext->DrawIndexed(pIndex->getIndexCount(), 0, 0);
 	}
+
+	HRESULT D3D11Device::compileShaderFromFile(const char* fileName, const char* entryName, const char* shaderModel, ID3DBlob** ppBlob)
+	{
+		HRESULT hr = S_OK;
+		DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
+#if defined(DEBUG) || defined(_DEBUG)
+		dwShaderFlags |= D3DCOMPILE_DEBUG;
+#endif
+		ID3DBlob* pErrorBlob;
+		hr = D3DX11CompileFromFileA(fileName, NULL, NULL, entryName, shaderModel, dwShaderFlags, 0, \
+			NULL, ppBlob, &pErrorBlob, NULL);
+		if (FAILED(hr))
+		{
+			if (pErrorBlob)
+				OutputDebugStringA((char*)pErrorBlob->GetBufferPointer());
+		}
+		SafeRelease(pErrorBlob);
+		return hr;
+	}
+	
+	IVertexShader* D3D11Device::createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber)
+	{
+		ID3DBlob* pVertexShaderBuffer = NULL;
+		ID3D11VertexShader* pVertexShader = NULL;
+		HRESULT hr = S_FALSE;
+		hr = compileShaderFromFile(fileName, entryName, "vs_4_0_level_9_1", &pVertexShaderBuffer);
+		HR_RETURN(hr);
+		hr = mpD3dDevice->CreateVertexShader(pVertexShaderBuffer->GetBufferPointer(), \
+			pVertexShaderBuffer->GetBufferSize(), NULL, &pVertexShader);
+		HR_RETURN(hr);
+		D3D11_INPUT_ELEMENT_DESC* d3dLayout = new D3D11_INPUT_ELEMENT_DESC[elementNumber];
+		for (int i = 0; i < elementNumber; i++)
+		{
+			d3dLayout[i].SemanticName = layout[i].semanticName;
+			d3dLayout[i].SemanticIndex = layout[i].semanticIndex;
+			switch (layout[i].gi_format)
+			{
+			case GI_FORMAT_R32G32B32_FLOAT:
+				d3dLayout[i].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+			case GI_FORMAT_R32G32_FLOAT:
+				d3dLayout[i].Format = DXGI_FORMAT_R32G32_FLOAT;
+			}
+			d3dLayout[i].InputSlot = layout[i].inputSlot;
+			d3dLayout[i].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+			d3dLayout[i].AlignedByteOffset = layout[i].inputByteOffset;
+			d3dLayout[i].InstanceDataStepRate = 0;
+		}
+		ID3D11InputLayout* pVertexLayout11 = NULL;
+		mpD3dDevice->CreateInputLayout(d3dLayout, elementNumber, pVertexShaderBuffer->GetBufferPointer(), \
+			pVertexShaderBuffer->GetBufferSize(), &pVertexLayout11);
+		SafeRelease(pVertexShaderBuffer);
+		delete[]d3dLayout;
+		return new D3D11VertexShader(pVertexShader, pVertexLayout11);
+	}
+
+	IPixelShader* D3D11Device::createPixelShader(const char* fileName, const char* entryName)
+	{
+		ID3DBlob* pPixelShaderBuffer = NULL;
+		HRESULT hr = compileShaderFromFile(fileName, entryName, "ps_4_0_level_9_1", &pPixelShaderBuffer);
+		HR_RETURN(hr);
+		ID3D11PixelShader* pPixelShader = NULL;
+		hr = mpD3dDevice->CreatePixelShader(pPixelShaderBuffer->GetBufferPointer(), \
+			pPixelShaderBuffer->GetBufferSize(), NULL, &pPixelShader);
+		SafeRelease(pPixelShaderBuffer);
+		HR_RETURN(hr);
+		return new D3D11PixelShader(pPixelShader);
+	}
 }

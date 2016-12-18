@@ -12,22 +12,18 @@ namespace sdmath
 	typedef glm::vec4 vec4;
 	typedef glm::mat4 mat4;
 	/*
-		mat4:  
-			col_type value[4]
-			value[0] value[1] value[2] value[3]
+		vector is a row vector,
+		for the mat4, you can use mat4[i] to get the ith col vector
+		mat[3] is the translation vector
+		in memery, a mat 4 is restored by col vector
 
-			v[0][0]  v[1][0]  v[2][0]  v[3][0]
-			v[0][1]  v[1][1]  v[2][1]  v[3][1]
-			v[0][2]  v[1][2]  v[2][2]  v[3][2]
-			v[0][3]  v[1][3]  v[2][3]  v[3][3]
-		vec4 is a row vector
-		so vec4 t * mat4 m = (t*v[0], t*v[1], t*v[2], t*v[3])
+		B * A * v means the vector v first transform by matrix A, and then B
+		be careful of that A * v does not equals with v * A, we should use A * v all the time
 
-		but in memery, it saved as the transpose of mat as below
-		    v[0][0]  v[0][1]  v[0][2]  v[0][3]
-		    v[1][0]  v[1][1]  v[1][2]  v[1][3]
-		    v[2][0]  v[2][1]  v[2][2]  v[2][3]
-		    v[3][0]  v[3][1]  v[3][2]  v[3][3]
+		use B to note for the translate transform of vector v, and then
+		C = translate(A, v) equals with C = A * B
+
+		we use right-hand coordinate system
 	*/
 	mat4 transpose(mat4& mat);
 	mat4 translate(mat4& mat, vec3& v);

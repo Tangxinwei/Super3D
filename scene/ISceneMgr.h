@@ -25,7 +25,8 @@ namespace scene
 			testInit();
 		}
 		virtual ~ISceneMgr();
-		IModel* createModel(SimpleVertex* vertex, int vertexCount, uint16_t* index, int indexCount);
+		IModel* createModel(SimpleVertex* vertex, int vertexCount, uint16_t* index, int indexCount, \
+					InputLayout* inputLayout, int inputElementNumber, char* vsFileName, char* psFileName);
 		IScene* createScene();
 		template <class T>
 		T* addToGcList(T* object)

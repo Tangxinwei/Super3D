@@ -6,6 +6,8 @@
 #include <math\sdmath.h>
 #include "IVertexBuff.h"
 #include "IVertexIndexBuff.h"
+#include "IVertexShader.h"
+#include "IPixelShader.h"
 namespace render
 {
 	class IDevice : public SDObject
@@ -20,6 +22,8 @@ namespace render
 				const sdmath::vec4& color = sdmath::vec4(0.0f, 0.0f, 0.0f, 1.0f)) = 0;
 			virtual void endScene() = 0;
 			virtual void drawIndexedVertexTriangles(IVertexBuff* pVertex, IVertexIndexBuff* pIndex) = 0;
+			virtual IVertexShader* createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber) = 0;
+			virtual IPixelShader* createPixelShader(const char* filename, const char* entryname) = 0;
 	};
 
 	IDevice* createDevice(CCreationParams& params);

@@ -114,6 +114,12 @@
     <ClInclude Include="..\..\render\IVertexShader.h">
       <Filter>Header Files\render</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\render\D3D11\D3D11VertexShader.h">
+      <Filter>Header Files\render\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\D3D11\D3D11PixelShader.h">
+      <Filter>Header Files\render\D3D11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp">

@@ -19,12 +19,19 @@ namespace scene
 		scene->retain();
 		return scene;
 	}
-
-	IModel* ISceneMgr::createModel(SimpleVertex* vertex, int vertexCount, uint16_t* index, int indexCount)
+	
+	IModel* ISceneMgr::createModel(SimpleVertex* vertex, int vertexCount, uint16_t* index, int indexCount, \
+				InputLayout* inputLayout, int inputElementNumber, char* vsFileName, char* psFileName)
 	{
 		IVertexBuff* vertexBuff = pDevice->createVertexBuff(sizeof(SimpleVertex) * vertexCount, vertex, EVT_SIMPLE);
+		addToGcList(vertexBuff);
 		IVertexIndexBuff* indexBuff = pDevice->createVertexIndexBuff(sizeof(uint16_t) * indexCount, index, EIT_16BIT);
-		return addToGcList(new IModel(vertexBuff, indexBuff));
+		addToGcList(indexBuff);
+		IVertexShader* vs = pDevice->createVertexShader(vsFileName, "vs_main", inputLayout, inputElementNumber);
+		addToGcList(vs);
+		IPixelShader* ps = pDevice->createPixelShader(psFileName, "ps_main");
+		addToGcList(ps);
+		return addToGcList(new IModel(vertexBuff, indexBuff, vs, ps));
 	}
 
 	void ISceneMgr::testInit()
@@ -40,7 +47,12 @@ namespace scene
 			0, 3, 2,\
 			0, 2, 1
 		};
-		IModel* model = createModel(vertex, 4, index, 6);
+
+		InputLayout input[] = {
+			{ "POSITION", 0, GI_FORMAT_R32G32B32_FLOAT, 0, 0 },
+			{ "COLOR", 0,GI_FORMAT_R32G32B32_FLOAT, 0, 12 },
+		};
+		IModel* model = createModel(vertex, 4, index, 6, input, 2, "../../shader/dx11/simpleVertex.hlsl", "../../shader/dx11/simpleVertex.hlsl");
 		scene->addModel(model);
 	}
 }

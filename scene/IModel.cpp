@@ -6,6 +6,8 @@ namespace scene
 	{
 		SafeRelease(pVertex);
 		SafeRelease(pIndex);
+		SafeRelease(pVertexShader);
+		SafeRelease(pPixelShader);
 		pScene = NULL;
 	}
 }
