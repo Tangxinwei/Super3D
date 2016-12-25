@@ -8,13 +8,16 @@
 #include "IVertexIndexBuff.h"
 #include "IVertexShader.h"
 #include "IPixelShader.h"
+#include "IBuffer.h"
 namespace render
 {
 	class IDevice : public SDObject
 	{
 		public:
+			virtual IBuffer* createBuffer(E_CPU_FLAG ecf, E_BIND_FLAG ebf, uint32_t len) = 0;
 			virtual IVertexBuff* createVertexBuff(int byteLen, void* initData, E_VERTEX_TYPE vType) = 0;
 			virtual IVertexIndexBuff* createVertexIndexBuff(int byteLen, void* initData, E_INDEX_TYPE iType) = 0;
+			virtual sdmath::vec2 getWindowSize() = 0;
 			virtual ~IDevice();
 			virtual bool initDevice(CCreationParams& params) = 0;
 			virtual void onResize(CCreationParams& params) = 0;
@@ -24,6 +27,8 @@ namespace render
 			virtual void drawIndexedVertexTriangles(IVertexBuff* pVertex, IVertexIndexBuff* pIndex) = 0;
 			virtual IVertexShader* createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber) = 0;
 			virtual IPixelShader* createPixelShader(const char* filename, const char* entryname) = 0;
+			virtual void setVSShader(IVertexShader* vs) = 0;
+			virtual void setPSShader(IPixelShader* ps) = 0;
 	};
 
 	IDevice* createDevice(CCreationParams& params);

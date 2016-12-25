@@ -7,9 +7,10 @@
 
 namespace render
 {
+	class IDevice;
 	class D3D11VertexShader : public IVertexShader
 	{
-	private:
+	public:
 		ID3D11VertexShader* vertexShader;
 		ID3D11InputLayout* inputLayout;
 

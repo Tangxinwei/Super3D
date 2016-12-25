@@ -15,11 +15,10 @@ namespace scene
 	{
 	protected:
 		sdmath::mat4 transform;
-		IEntity* parent;
-		vector<IEntity*> children;
 	public:
-		IEntity(): parent(NULL), transform(){}
+		IEntity(): transform(){}
 		void setPosition(float x, float y, float z);
+		sdmath::mat4 getWorldTransform() { return transform; }
 		sdmath::vec3 getPosition();
 		void rotate(sdmath::vec3& axis, float angle);
 		void rotateX(float angle) { rotate(sdmath::vec3(1, 0, 0), angle); }

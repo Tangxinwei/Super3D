@@ -1,5 +1,5 @@
 #include "ISceneMgr.h"
-
+#include <render\ShaderDefs.h>
 namespace scene
 {
 	ISceneMgr::~ISceneMgr()
@@ -34,6 +34,11 @@ namespace scene
 		return addToGcList(new IModel(vertexBuff, indexBuff, vs, ps));
 	}
 
+	ICamera* ISceneMgr::createCamera(float fov, float aspect, float near, float far)
+	{
+		return addToGcList(new ICamera(fov, aspect, near, far));
+	}
+
 	void ISceneMgr::testInit()
 	{
 		IScene* scene = createScene();
@@ -47,12 +52,10 @@ namespace scene
 			0, 3, 2,\
 			0, 2, 1
 		};
-
-		InputLayout input[] = {
-			{ "POSITION", 0, GI_FORMAT_R32G32B32_FLOAT, 0, 0 },
-			{ "COLOR", 0,GI_FORMAT_R32G32B32_FLOAT, 0, 12 },
-		};
-		IModel* model = createModel(vertex, 4, index, 6, input, 2, "../../shader/dx11/simpleVertex.hlsl", "../../shader/dx11/simpleVertex.hlsl");
+		IModel* model = createModel(vertex, 4, index, 6, SimpleVertexHLSL::VS_INPUT_LAYOUT::input, 2, "../../shader/dx11/simpleVertex.hlsl", "../../shader/dx11/simpleVertex.hlsl");
 		scene->addModel(model);
+		vec2 windowSize = pDevice->getWindowSize();
+		ICamera* camera = createCamera(3.1415 / 2, windowSize[1] / windowSize[0], 1, 1000);
+		scene->addCamera(camera);
 	}
 }

@@ -3,6 +3,7 @@
 #include <math\sdmath.h>
 using namespace sdmath;
 #include <common\CommonType.h>
+#include "IVertexShader.h"
 namespace render
 {
 	class SimpleVertex

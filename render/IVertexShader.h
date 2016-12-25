@@ -1,9 +1,10 @@
 #pragma once
-#include <common\CCreationParams.h>
 #include <common\SDObject.h>
 #include <common\CommonType.h>
-#include "SD3DVertex.h"
 #include <math\sdmath.h>
+#include <vector>
+#include "IBuffer.h"
+using namespace std;
 
 namespace render
 {
@@ -19,7 +20,11 @@ namespace render
 	class IVertexShader : public SDObject
 	{
 	public:
-		virtual ~IVertexShader(){}
+		virtual ~IVertexShader()
+		{
+			
+		}
+
 	};
 }
 

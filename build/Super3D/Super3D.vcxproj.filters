@@ -120,6 +120,21 @@
     <ClInclude Include="..\..\render\D3D11\D3D11PixelShader.h">
       <Filter>Header Files\render\D3D11</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\render\ShaderDefs.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scene\ICamera.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\IBuffer.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\D3D11\D3D11Buffer.h">
+      <Filter>Header Files\render\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\render\D3D11\D3D11CommonType.h">
+      <Filter>Header Files\render\D3D11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp">
@@ -171,6 +186,12 @@
       <Filter>Source Files\render</Filter>
     </ClCompile>
     <ClCompile Include="..\..\render\IVertexShader.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\render\ShaderDefs.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\scene\ICamera.cpp">
       <Filter>Source Files\render</Filter>
     </ClCompile>
   </ItemGroup>

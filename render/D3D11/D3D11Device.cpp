@@ -76,6 +76,8 @@ namespace render
 		SafeRelease(mpRenderTargetView);
 		SafeRelease(mpDepthStencilBuffer);
 		SafeRelease(mpDepthStencilView);
+		windowWidth = params.width;
+		windowHeight = params.height;
 		//指定后台缓冲区的渲染目标视图
 		mpSwapChain->ResizeBuffers(1, params.width, params.height, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
 		ID3D11Texture2D* backBuffer;
@@ -260,5 +262,31 @@ namespace render
 		SafeRelease(pPixelShaderBuffer);
 		HR_RETURN(hr);
 		return new D3D11PixelShader(pPixelShader);
+	}
+
+	void D3D11Device::setPSShader(IPixelShader* ps)
+	{
+		mpImmediateContext->PSSetShader(((D3D11PixelShader*)ps)->pixelShader, NULL, 0);
+	}
+
+	void D3D11Device::setVSShader(IVertexShader* vs)
+	{
+		D3D11VertexShader* nvs = (D3D11VertexShader*)vs;
+		mpImmediateContext->VSSetShader(nvs->vertexShader, NULL, 0);
+		mpImmediateContext->IASetInputLayout(nvs->inputLayout);
+	}
+
+	IBuffer* D3D11Device::createBuffer(E_CPU_FLAG ecf, E_BIND_FLAG ebf, uint32_t len)
+	{
+		D3D11_BUFFER_DESC desc;
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.BindFlags = convertCommonType(ebf);
+		desc.CPUAccessFlags = convertCommonType(ecf);
+		desc.MiscFlags = 0;
+		desc.ByteWidth = len;
+		ID3D11Buffer* result;
+		HRESULT hr = mpD3dDevice->CreateBuffer(&desc, NULL, &result);
+		HR_RETURN(hr);
+		return (IBuffer*)new D3D11Buffer(ecf, ebf, len, result);
 	}
 }

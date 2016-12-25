@@ -29,6 +29,8 @@ namespace sdmath
 	mat4 translate(mat4& mat, vec3& v);
 	mat4 rotate(mat4& mat, float& angle, vec3& axis);
 	mat4 inverse(mat4& mat);
+	mat4 perspective(float fov, float aspect, float near, float far);
+
 
 	template<class T>
     inline T interpolate(const T& t1, const T& t2, float d)

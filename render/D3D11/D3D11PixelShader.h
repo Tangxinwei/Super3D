@@ -9,15 +9,15 @@ namespace render
 {
 	class D3D11PixelShader : public IPixelShader
 	{
-	private:
-		ID3D11PixelShader* pBlob;
+	public:
+		ID3D11PixelShader* pixelShader;
 	public:
 		virtual ~D3D11PixelShader()
 		{
-			SafeRelease(pBlob);
+			SafeRelease(pixelShader);
 		}
 
-		D3D11PixelShader(ID3D11PixelShader* p1) : pBlob(p1)
+		D3D11PixelShader(ID3D11PixelShader* p1) : pixelShader(p1)
 		{
 
 		}

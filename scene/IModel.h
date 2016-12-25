@@ -31,6 +31,8 @@ namespace scene
 		}
 		void render(IDevice* pDevice)
 		{
+			pDevice->setPSShader(pPixelShader);
+			pDevice->setVSShader(pVertexShader);
 			pDevice->drawIndexedVertexTriangles(pVertex, pIndex);
 		}
 		IScene* getCurrentScene() { return pScene; }
