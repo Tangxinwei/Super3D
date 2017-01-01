@@ -29,10 +29,12 @@ namespace scene
 			pVertexShader->retain();
 			pPixelShader->retain();
 		}
-		void render(IDevice* pDevice)
+		void render()
 		{
+			IDevice* pDevice = getDeviceInstance();
 			pDevice->setPSShader(pPixelShader);
 			pDevice->setVSShader(pVertexShader);
+			pVertexShader->setParams(this);
 			pDevice->drawIndexedVertexTriangles(pVertex, pIndex);
 		}
 		IScene* getCurrentScene() { return pScene; }

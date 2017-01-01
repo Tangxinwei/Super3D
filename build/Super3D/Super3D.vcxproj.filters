@@ -55,6 +55,12 @@
     <Filter Include="Source Files\scene">
       <UniqueIdentifier>{dff54d73-0bc9-4fb8-acef-6f2eec6b9b8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{af23ee44-036e-410e-a27e-044781048ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{f2971afe-3938-4e08-9135-a5d38142585a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\SDObject.h">
@@ -135,6 +141,9 @@
     <ClInclude Include="..\..\render\D3D11\D3D11CommonType.h">
       <Filter>Header Files\render\D3D11</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\util\Function.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp">
@@ -193,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="..\..\scene\ICamera.cpp">
       <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\SDObject.cpp">
+      <Filter>Source Files\common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

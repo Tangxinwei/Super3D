@@ -14,6 +14,7 @@ namespace render
 	class IDevice : public SDObject
 	{
 		public:
+			virtual void setBufferContent(IBuffer* buffer, void* p, uint32_t size) = 0;
 			virtual IBuffer* createBuffer(E_CPU_FLAG ecf, E_BIND_FLAG ebf, uint32_t len) = 0;
 			virtual IVertexBuff* createVertexBuff(int byteLen, void* initData, E_VERTEX_TYPE vType) = 0;
 			virtual IVertexIndexBuff* createVertexIndexBuff(int byteLen, void* initData, E_INDEX_TYPE iType) = 0;
@@ -25,12 +26,13 @@ namespace render
 				const sdmath::vec4& color = sdmath::vec4(0.0f, 0.0f, 0.0f, 1.0f)) = 0;
 			virtual void endScene() = 0;
 			virtual void drawIndexedVertexTriangles(IVertexBuff* pVertex, IVertexIndexBuff* pIndex) = 0;
-			virtual IVertexShader* createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber) = 0;
+			virtual IVertexShader* createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber, E_SHADER_TYPE shaderType) = 0;
 			virtual IPixelShader* createPixelShader(const char* filename, const char* entryname) = 0;
 			virtual void setVSShader(IVertexShader* vs) = 0;
-			virtual void setPSShader(IPixelShader* ps) = 0;
+			virtual void setPSShader(IPixelShader* ps) = 0; 
 	};
 
 	IDevice* createDevice(CCreationParams& params);
+	IDevice* getDeviceInstance();
 }
 

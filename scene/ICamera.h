@@ -22,7 +22,7 @@ namespace scene
 		{
 			
 		}
-		void render(IDevice* pDevice)
+		void render()
 		{
 			
 		}

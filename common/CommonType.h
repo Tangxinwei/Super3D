@@ -5,6 +5,11 @@
 
 namespace render 
 {
+	enum E_SHADER_TYPE {EST_SIMPLE, };
+
+
+
+
 	enum DeviceType { DT_DX11, };
 	enum E_VERTEX_TYPE { EVT_STANDARD, EVT_SIMPLE};
 	enum E_PRIMITIVE_TYPE { EPT_TRIANGLES, };

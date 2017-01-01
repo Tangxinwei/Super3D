@@ -14,34 +14,41 @@ namespace scene
 	}
 	IScene* ISceneMgr::createScene()
 	{
-		IScene* scene = addToGcList(new IScene(this));
+		IScene* scene = new IScene(this);
+		scene->autoRelease();
 		sceneList.push_back(scene);
 		scene->retain();
 		return scene;
 	}
 	
 	IModel* ISceneMgr::createModel(SimpleVertex* vertex, int vertexCount, uint16_t* index, int indexCount, \
-				InputLayout* inputLayout, int inputElementNumber, char* vsFileName, char* psFileName)
+				InputLayout* inputLayout, int inputElementNumber, char* vsFileName, char* psFileName, E_SHADER_TYPE shaderType)
 	{
+		IDevice* pDevice = getDeviceInstance();
 		IVertexBuff* vertexBuff = pDevice->createVertexBuff(sizeof(SimpleVertex) * vertexCount, vertex, EVT_SIMPLE);
-		addToGcList(vertexBuff);
+		vertexBuff->autoRelease();
 		IVertexIndexBuff* indexBuff = pDevice->createVertexIndexBuff(sizeof(uint16_t) * indexCount, index, EIT_16BIT);
-		addToGcList(indexBuff);
-		IVertexShader* vs = pDevice->createVertexShader(vsFileName, "vs_main", inputLayout, inputElementNumber);
-		addToGcList(vs);
+		indexBuff->autoRelease();
+		IVertexShader* vs = pDevice->createVertexShader(vsFileName, "vs_main", inputLayout, inputElementNumber, shaderType);
+		vs->autoRelease();
 		IPixelShader* ps = pDevice->createPixelShader(psFileName, "ps_main");
-		addToGcList(ps);
-		return addToGcList(new IModel(vertexBuff, indexBuff, vs, ps));
+		ps->autoRelease();
+		IModel* model = new IModel(vertexBuff, indexBuff, vs, ps);
+		model->autoRelease();
+		return model;
 	}
 
 	ICamera* ISceneMgr::createCamera(float fov, float aspect, float near, float far)
 	{
-		return addToGcList(new ICamera(fov, aspect, near, far));
+		ICamera* camera = new ICamera(fov, aspect, near, far);
+		camera->autoRelease();
+		return camera;
 	}
 
 	void ISceneMgr::testInit()
 	{
 		IScene* scene = createScene();
+		IDevice* pDevice = getDeviceInstance();
 		sdmath::vec4 color(1, 1, 1, 1);
 		SimpleVertex vertex[4] =
 		{
@@ -52,7 +59,8 @@ namespace scene
 			0, 3, 2,\
 			0, 2, 1
 		};
-		IModel* model = createModel(vertex, 4, index, 6, SimpleVertexHLSL::VS_INPUT_LAYOUT::input, 2, "../../shader/dx11/simpleVertex.hlsl", "../../shader/dx11/simpleVertex.hlsl");
+		IModel* model = createModel(vertex, 4, index, 6, SimpleVertexHLSL::VS_INPUT_LAYOUT::input, 2, "../../shader/dx11/simpleVertex.hlsl", \
+				"../../shader/dx11/simpleVertex.hlsl", EST_SIMPLE);
 		scene->addModel(model);
 		vec2 windowSize = pDevice->getWindowSize();
 		ICamera* camera = createCamera(3.1415 / 2, windowSize[1] / windowSize[0], 1, 1000);

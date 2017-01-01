@@ -4,7 +4,7 @@
 using namespace sdmath;
 #include <common\CommonType.h>
 #include "IVertexShader.h"
-#include "SD3DVertex.h"
+
 namespace render
 {
 	namespace SimpleVertexHLSL
@@ -21,5 +21,7 @@ namespace render
 		public:
 			static InputLayout input[2];
 		};
+		int setParams(IVertexShader* vs, scene::IModel* model);
+		int addBuffer(IVertexShader* vs);
 	}
 }

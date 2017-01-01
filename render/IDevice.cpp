@@ -5,6 +5,7 @@
 
 namespace render
 {
+	IDevice* p = NULL;
 	IDevice::~IDevice()
 	{
 
@@ -25,6 +26,12 @@ namespace render
 				device = NULL;
 			}
 		}
+		p = device;
 		return device;
+	}
+
+	IDevice* getDeviceInstance()
+	{
+		return p;
 	}
 }

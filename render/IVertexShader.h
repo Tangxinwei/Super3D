@@ -3,11 +3,16 @@
 #include <common\CommonType.h>
 #include <math\sdmath.h>
 #include <vector>
-#include "IBuffer.h"
-using namespace std;
+#include <util\Function.hpp>
 
+using namespace std;
+namespace scene
+{
+	class IModel;
+}
 namespace render
 {
+	class IBuffer;
 	struct InputLayout
 	{
 		const char* semanticName;
@@ -16,15 +21,17 @@ namespace render
 		unsigned int inputSlot;
 		unsigned int inputByteOffset;
 	};
-
 	class IVertexShader : public SDObject
 	{
+	private:
+		vector<IBuffer*> bufferList;
+		E_SHADER_TYPE shaderType;
 	public:
-		virtual ~IVertexShader()
-		{
-			
-		}
-
+		IVertexShader(E_SHADER_TYPE shaderType);
+		virtual ~IVertexShader();
+		void addBuffer(IBuffer* buff);
+		IBuffer* getBufferByIdx(int idx) { return bufferList[idx]; }
+		void setParams(scene::IModel* model);
 	};
 }
 

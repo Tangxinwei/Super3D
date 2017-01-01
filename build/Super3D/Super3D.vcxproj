@@ -178,10 +178,12 @@
     <ClInclude Include="..\..\scene\IModel.h" />
     <ClInclude Include="..\..\scene\IScene.h" />
     <ClInclude Include="..\..\scene\ISceneMgr.h" />
+    <ClInclude Include="..\..\util\Function.hpp" />
     <ClInclude Include="..\..\window\CMainWindow.h" />
     <ClInclude Include="..\..\window\win\CMainWindowForWindows.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\SDObject.cpp" />
     <ClCompile Include="..\..\math\sdmath.cpp" />
     <ClCompile Include="..\..\render\D3D11\D3D11Device.cpp" />
     <ClCompile Include="..\..\render\D3D11\D3D11VertexBuff.cpp" />

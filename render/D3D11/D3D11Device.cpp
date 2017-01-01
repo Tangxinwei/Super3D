@@ -216,7 +216,7 @@ namespace render
 		return hr;
 	}
 	
-	IVertexShader* D3D11Device::createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber)
+	IVertexShader* D3D11Device::createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber, E_SHADER_TYPE shaderType)
 	{
 		ID3DBlob* pVertexShaderBuffer = NULL;
 		ID3D11VertexShader* pVertexShader = NULL;
@@ -248,7 +248,7 @@ namespace render
 			pVertexShaderBuffer->GetBufferSize(), &pVertexLayout11);
 		SafeRelease(pVertexShaderBuffer);
 		delete[]d3dLayout;
-		return new D3D11VertexShader(pVertexShader, pVertexLayout11);
+		return new D3D11VertexShader(pVertexShader, pVertexLayout11, shaderType);
 	}
 
 	IPixelShader* D3D11Device::createPixelShader(const char* fileName, const char* entryName)
@@ -288,5 +288,13 @@ namespace render
 		HRESULT hr = mpD3dDevice->CreateBuffer(&desc, NULL, &result);
 		HR_RETURN(hr);
 		return (IBuffer*)new D3D11Buffer(ecf, ebf, len, result);
+	}
+
+	void D3D11Device::setBufferContent(IBuffer* buffer, void* p, uint32_t size)
+	{
+		D3D11_MAPPED_SUBRESOURCE MappedResource;
+		mpImmediateContext->Map((ID3D11Buffer*)buffer->getBuffer(), 0, D3D11_MAP_WRITE_DISCARD, 0, &MappedResource);
+		memcpy(MappedResource.pData, p, size);
+		mpImmediateContext->Unmap((ID3D11Buffer*)buffer->getBuffer(), 0);
 	}
 }

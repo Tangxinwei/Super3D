@@ -20,8 +20,8 @@ namespace render
 			SafeRelease(vertexShader);
 			SafeRelease(inputLayout);
 		}
-		D3D11VertexShader(ID3D11VertexShader* v, ID3D11InputLayout* input) : \
-			vertexShader(v), inputLayout(input){}
+		D3D11VertexShader(ID3D11VertexShader* v, ID3D11InputLayout* input, E_SHADER_TYPE shaderType) : \
+			vertexShader(v), inputLayout(input), IVertexShader(shaderType){}
 	};
 }
 

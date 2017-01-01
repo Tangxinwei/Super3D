@@ -7,16 +7,13 @@ class CMainWindow
 protected:
 	CCreationParams createParams;
 	render::IDevice *pDevice;
-	scene::ISceneMgr *pSceneMgr;
 
 public:
-	virtual ~CMainWindow() { SafeRelease(pDevice); SafeRelease(pSceneMgr); }
+	virtual ~CMainWindow() { }
 	virtual bool initWindow(CCreationParams& params)
 	{
 		this->createParams = params;
-		this->pDevice = render::createDevice(params);
-		if (this->pDevice != NULL)
-			this->pSceneMgr = new scene::ISceneMgr(pDevice);
+		this->pDevice = render::createDevice(params);	
 		return this->pDevice != NULL;
 	}
 	virtual bool run() = 0;
@@ -25,6 +22,7 @@ public:
 	{
 		while (this->run())
 		{
+			scene::ISceneMgr* pSceneMgr = scene::ISceneMgr::getInstance();
 			pSceneMgr->update();
 			pSceneMgr->render();
 		}

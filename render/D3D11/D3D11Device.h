@@ -57,8 +57,9 @@ namespace render
 		virtual IVertexBuff* createVertexBuff(int byteLen, void* initData, E_VERTEX_TYPE vType);
 		virtual IVertexIndexBuff* createVertexIndexBuff(int byteLen, void* initData, E_INDEX_TYPE iType);
 		virtual IBuffer* createBuffer(E_CPU_FLAG ecf, E_BIND_FLAG ebf, uint32_t len);
+		virtual void setBufferContent(IBuffer* buffer, void* p, uint32_t size);
 		virtual void drawIndexedVertexTriangles(IVertexBuff* pVertex, IVertexIndexBuff* pIndex);
-		virtual IVertexShader* createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber);
+		virtual IVertexShader* createVertexShader(const char* fileName, const char* entryName, InputLayout* layout, int elementNumber, E_SHADER_TYPE shaderType);
 		virtual IPixelShader* createPixelShader(const char* filename, const char* entryname);
 		virtual void setVSShader(IVertexShader* vs);
 		virtual void setPSShader(IPixelShader* ps);

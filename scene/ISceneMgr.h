@@ -1,4 +1,5 @@
 #pragma once
+#include <util\Function.hpp>
 #include <common\CCreationParams.h>
 #include <common\SDObject.h>
 #include <common\CommonType.h>
@@ -13,47 +14,37 @@ using namespace std;
 
 namespace scene
 {
-	class ISceneMgr : public SDObject
+	class ISceneMgr : public SingletonBase<ISceneMgr>
 	{
-	protected:
-		vector<SDObject*> gcList;
-		vector<IScene*> sceneList;
-		IDevice* pDevice;
-	public:
-		void testInit();
-		ISceneMgr(IDevice* p) : pDevice(p) 
+	private:
+		virtual void doInit()
 		{
 			testInit();
 		}
+	protected:
+		vector<IScene*> sceneList;
+		
+	public:
+		void testInit();
 		virtual ~ISceneMgr();
 		IModel* createModel(SimpleVertex* vertex, int vertexCount, uint16_t* index, int indexCount, \
-					InputLayout* inputLayout, int inputElementNumber, char* vsFileName, char* psFileName);
+					InputLayout* inputLayout, int inputElementNumber, char* vsFileName, char* psFileName, E_SHADER_TYPE shaderType);
 		ICamera* createCamera(float fov, float aspect, float near, float far);
 		IScene* createScene();
-		template <class T>
-		T* addToGcList(T* object)
-		{
-			gcList.push_back(object);
-			return object;
-		}
+
 		void update()
 		{
-			vector<SDObject*>::iterator it = gcList.begin();
-			while (it != gcList.end())
-			{
-				(*it)->Release();
-				it++;
-			}
-			gcList.clear();
+			MemPool::getInstance()->releaseAll();
+			for (IScene* scene : sceneList)
+				scene->update();
 		}
 		void render()
 		{
+			IDevice* pDevice = getDeviceInstance();
 			pDevice->beginScene();
-			vector<IScene*>::iterator it = sceneList.begin();
-			while (it != sceneList.end())
+			for (IScene* scene : sceneList)
 			{
-				(*it)->render(pDevice);
-				it++;
+				scene->render();
 			}
 			pDevice->endScene();
 		}

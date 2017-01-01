@@ -19,9 +19,9 @@ namespace scene
 		ISceneMgr* pSceneMgr;
 		vector<IModel*> modelList;
 		ICamera* camera;
+	public:
 		mat4 g_viewMatrix;
 		mat4 g_viewProjectionMatrix;
-	public:
 		IScene(ISceneMgr* p) : pSceneMgr(p){}
 		~IScene();
 		bool addModel(IModel* model)
@@ -44,8 +44,9 @@ namespace scene
 			return true;
 		}
 		void update(){}
-		void render(IDevice* pDevice)
+		void render()
 		{
+			IDevice* pDevice = getDeviceInstance();
 			if (camera)
 			{
 				g_viewMatrix = inverse(camera->getWorldTransform());
@@ -56,7 +57,7 @@ namespace scene
 			vector<IModel*>::iterator it = modelList.begin();
 			while (it != modelList.end())
 			{
-				(*it)->render(pDevice);
+				(*it)->render();
 				it++;
 			}
 			pDevice->endScene();
