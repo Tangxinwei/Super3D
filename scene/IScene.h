@@ -24,44 +24,10 @@ namespace scene
 		mat4 g_viewProjectionMatrix;
 		IScene(ISceneMgr* p) : pSceneMgr(p){}
 		~IScene();
-		bool addModel(IModel* model)
-		{
-			if (model->getCurrentScene())
-				return false;
-			modelList.push_back(model);
-			model->retain();
-			model->onAddToScene(this);
-			return true;
-		}
-		
-		bool addCamera(ICamera* camera)
-		{
-			if (camera->getCurrentScene())
-				return false;
-			this->camera = camera;
-			camera->retain();
-			camera->onAddToScene(this);
-			return true;
-		}
-		void update(){}
-		void render()
-		{
-			IDevice* pDevice = getDeviceInstance();
-			if (camera)
-			{
-				g_viewMatrix = inverse(camera->getWorldTransform());
-				mat4 projectionMatrix = camera->getProjectionMatrix();
-				g_viewProjectionMatrix = projectionMatrix * g_viewMatrix;
-			}
-			pDevice->beginScene();
-			vector<IModel*>::iterator it = modelList.begin();
-			while (it != modelList.end())
-			{
-				(*it)->render();
-				it++;
-			}
-			pDevice->endScene();
-		}
+		bool addModel(IModel* model);
+		bool addCamera(ICamera* camera);
+		void update();
+		void render();
 	};
 }
 

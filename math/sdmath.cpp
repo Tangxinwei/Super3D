@@ -27,6 +27,5 @@ namespace sdmath
 	mat4 perspective(float fov, float aspect, float near, float far)
 	{
 		return glm::perspective(fov, aspect, near, far);
-	}
-	
+	}	
 }

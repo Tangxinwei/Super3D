@@ -31,6 +31,7 @@ namespace render
 		virtual ~IVertexShader();
 		void addBuffer(IBuffer* buff);
 		IBuffer* getBufferByIdx(int idx) { return bufferList[idx]; }
+		vector<IBuffer*>& getBufferList() { return bufferList; }
 		void setParams(scene::IModel* model);
 	};
 }

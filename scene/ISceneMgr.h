@@ -16,8 +16,8 @@ namespace scene
 {
 	class ISceneMgr : public SingletonBase<ISceneMgr>
 	{
-	private:
-		virtual void doInit()
+	public:
+		void doInit()
 		{
 			testInit();
 		}

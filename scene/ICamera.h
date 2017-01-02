@@ -15,7 +15,6 @@ namespace scene
 	class ICamera : public IEntity
 	{
 	protected:
-		IScene* pScene;
 		float fov, aspect, near, far;
 	public:
 		ICamera(float f, float a, float n, float fa) : fov(f), aspect(a), near(n), far(fa)
@@ -25,11 +24,6 @@ namespace scene
 		void render()
 		{
 			
-		}
-		IScene* getCurrentScene() { return pScene; }
-		void onAddToScene(IScene* scene)
-		{
-			pScene = scene;
 		}
 		virtual ~ICamera();
 

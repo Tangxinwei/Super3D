@@ -17,6 +17,9 @@ namespace render
 	{
 		//创建设备
 		UINT createDeviceFlags = 0;
+#if defined(DEBUG) || defined(_DEBUG)
+		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
 		D3D_FEATURE_LEVEL featureLevel;
 		if (FAILED(D3D11CreateDevice(NULL, D3D_DRIVER_TYPE_HARDWARE, 0, createDeviceFlags, \
 			0, 0, D3D11_SDK_VERSION, &mpD3dDevice, &featureLevel, &mpImmediateContext)))
@@ -105,8 +108,13 @@ namespace render
 		depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 		depthStencilDesc.CPUAccessFlags = 0;
 		depthStencilDesc.MiscFlags = 0;
-		mpD3dDevice->CreateTexture2D(&depthStencilDesc, NULL, &mpDepthStencilBuffer);
-		mpD3dDevice->CreateDepthStencilView(mpDepthStencilBuffer, 0, &mpDepthStencilView);
+		HR(mpD3dDevice->CreateTexture2D(&depthStencilDesc, NULL, &mpDepthStencilBuffer));
+		D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+		ZeroMemory(&descDSV, sizeof(descDSV));
+		descDSV.Format = depthStencilDesc.Format;
+		descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+		descDSV.Texture2D.MipSlice = 0;
+		HR(mpD3dDevice->CreateDepthStencilView(mpDepthStencilBuffer, &descDSV, &mpDepthStencilView));
 		mpImmediateContext->OMSetRenderTargets(1, &mpRenderTargetView, mpDepthStencilView);
 		//设置视口
 		mScreenViewport.TopLeftX = 0;
@@ -116,6 +124,18 @@ namespace render
 		mScreenViewport.MinDepth = 0;
 		mScreenViewport.MaxDepth = 1.0f;
 		mpImmediateContext->RSSetViewports(1, &mScreenViewport);
+
+		//设置裁剪模式
+		D3D11_RASTERIZER_DESC noCullDesc;
+		ZeroMemory(&noCullDesc, sizeof(D3D11_RASTERIZER_DESC));
+		noCullDesc.FillMode = D3D11_FILL_SOLID;
+		noCullDesc.CullMode = D3D11_CULL_NONE;
+		noCullDesc.FrontCounterClockwise = false;
+		noCullDesc.DepthClipEnable = true;
+		ID3D11RasterizerState * NoCullRS;
+		mpD3dDevice->CreateRasterizerState(&noCullDesc, &NoCullRS);
+		mpImmediateContext->RSSetState(NoCullRS);
+		NoCullRS->Release();
 	}
 
 	D3D11Device::~D3D11Device()
@@ -127,12 +147,12 @@ namespace render
 	{
 		if (backBuffer)
 		{
-			sdmath::vec4 a(0, 0, 0, 1);
+			//sdmath::vec4 a(0, 0, 0, 1);
 			//float a[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-			mpImmediateContext->ClearRenderTargetView(mpRenderTargetView, (const float*)&a);
+			mpImmediateContext->ClearRenderTargetView(mpRenderTargetView, (const float*)&color);
 		}
 		if (zBuffer)
-			mpImmediateContext->ClearDepthStencilView(mpDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 0, 0);
+			mpImmediateContext->ClearDepthStencilView(mpDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0);
 		return true;
 	}
 	void D3D11Device::endScene()
@@ -187,12 +207,8 @@ namespace render
 		mpImmediateContext->IASetVertexBuffers(0, 1, &vertexBuff, &stride, &offset);
 		
 		ID3D11Buffer* indexBuff = (ID3D11Buffer*)pIndex->getBuff();
-		DXGI_FORMAT indexType = DXGI_FORMAT_UNKNOWN;
-		switch (pIndex->getIndexType())
-		{
-		case EIT_16BIT:
-			indexType = DXGI_FORMAT_R16_UINT;
-		}
+		DXGI_FORMAT indexType = convertCommonType(pIndex->getIndexType());
+		
 		mpImmediateContext->IASetIndexBuffer(indexBuff, indexType, 0);
 		mpImmediateContext->DrawIndexed(pIndex->getIndexCount(), 0, 0);
 	}
@@ -221,7 +237,7 @@ namespace render
 		ID3DBlob* pVertexShaderBuffer = NULL;
 		ID3D11VertexShader* pVertexShader = NULL;
 		HRESULT hr = S_FALSE;
-		hr = compileShaderFromFile(fileName, entryName, "vs_4_0_level_9_1", &pVertexShaderBuffer);
+		hr = compileShaderFromFile(fileName, entryName, "vs_4_0", &pVertexShaderBuffer);
 		HR_RETURN(hr);
 		hr = mpD3dDevice->CreateVertexShader(pVertexShaderBuffer->GetBufferPointer(), \
 			pVertexShaderBuffer->GetBufferSize(), NULL, &pVertexShader);
@@ -231,13 +247,7 @@ namespace render
 		{
 			d3dLayout[i].SemanticName = layout[i].semanticName;
 			d3dLayout[i].SemanticIndex = layout[i].semanticIndex;
-			switch (layout[i].gi_format)
-			{
-			case GI_FORMAT_R32G32B32_FLOAT:
-				d3dLayout[i].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-			case GI_FORMAT_R32G32_FLOAT:
-				d3dLayout[i].Format = DXGI_FORMAT_R32G32_FLOAT;
-			}
+			d3dLayout[i].Format = convertCommonType(layout[i].gi_format);
 			d3dLayout[i].InputSlot = layout[i].inputSlot;
 			d3dLayout[i].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 			d3dLayout[i].AlignedByteOffset = layout[i].inputByteOffset;
@@ -254,7 +264,7 @@ namespace render
 	IPixelShader* D3D11Device::createPixelShader(const char* fileName, const char* entryName)
 	{
 		ID3DBlob* pPixelShaderBuffer = NULL;
-		HRESULT hr = compileShaderFromFile(fileName, entryName, "ps_4_0_level_9_1", &pPixelShaderBuffer);
+		HRESULT hr = compileShaderFromFile(fileName, entryName, "ps_4_0", &pPixelShaderBuffer);
 		HR_RETURN(hr);
 		ID3D11PixelShader* pPixelShader = NULL;
 		hr = mpD3dDevice->CreatePixelShader(pPixelShaderBuffer->GetBufferPointer(), \
@@ -296,5 +306,19 @@ namespace render
 		mpImmediateContext->Map((ID3D11Buffer*)buffer->getBuffer(), 0, D3D11_MAP_WRITE_DISCARD, 0, &MappedResource);
 		memcpy(MappedResource.pData, p, size);
 		mpImmediateContext->Unmap((ID3D11Buffer*)buffer->getBuffer(), 0);
+	}
+
+	void D3D11Device::vsSetContentBuffers(IVertexShader* vs, vector<IBuffer*>& buffers, int start, int number)
+	{
+		ID3D11Buffer** p = (ID3D11Buffer**)malloc(number * sizeof(ID3D11Buffer*));
+		for (int i = 0; i < number; i++)
+			p[i] = (ID3D11Buffer*) (buffers[i]->getBuffer());
+		mpImmediateContext->VSSetConstantBuffers(start, number, p);
+		free(p);
+	}
+
+	sdmath::mat4 D3D11Device::convertMatrixToShaderResourceMatrix(sdmath::mat4& original)
+	{
+		return original;
 	}
 }

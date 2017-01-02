@@ -19,29 +19,9 @@ namespace scene
 		IVertexIndexBuff* pIndex;
 		IVertexShader* pVertexShader;
 		IPixelShader* pPixelShader;
-		IScene* pScene;
 	public:
-		IModel(IVertexBuff* v, IVertexIndexBuff* pI, IVertexShader* pVS, IPixelShader* pPS) : pVertex(v), pIndex(pI), \
-			pScene(NULL), pVertexShader(pVS), pPixelShader(pPS)
-		{
-			pVertex->retain();
-			pIndex->retain();
-			pVertexShader->retain();
-			pPixelShader->retain();
-		}
-		void render()
-		{
-			IDevice* pDevice = getDeviceInstance();
-			pDevice->setPSShader(pPixelShader);
-			pDevice->setVSShader(pVertexShader);
-			pVertexShader->setParams(this);
-			pDevice->drawIndexedVertexTriangles(pVertex, pIndex);
-		}
-		IScene* getCurrentScene() { return pScene; }
-		void onAddToScene(IScene* scene)
-		{
-			pScene = scene;
-		}
+		IModel(IVertexBuff* v, IVertexIndexBuff* pI, IVertexShader* pVS, IPixelShader* pPS);
+		void render();
 		virtual ~IModel();
 	};
 }

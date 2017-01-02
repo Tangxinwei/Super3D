@@ -11,12 +11,16 @@ using namespace render;
 using namespace std;
 namespace scene
 {
+	class IScene;
 	class IEntity : public SDObject
 	{
 	protected:
 		sdmath::mat4 transform;
+		IScene* pScene;
 	public:
-		IEntity(): transform(){}
+		IEntity(): transform(), pScene(NULL){}
+		IScene* getCurrentScene() { return pScene; }
+		void onAddToScene(IScene* scene){pScene = scene;}
 		void setPosition(float x, float y, float z);
 		sdmath::mat4 getWorldTransform() { return transform; }
 		sdmath::vec3 getPosition();

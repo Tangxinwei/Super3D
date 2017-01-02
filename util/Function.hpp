@@ -77,17 +77,20 @@ class SingletonBase
 protected:
 	SingletonBase()
 	{
-		doInit();
+
 	}
 	static T* _instance;
 public:
 	static T* getInstance()
 	{
 		if (!_instance)
+		{
 			_instance = new T;
+			_instance->doInit();
+		}
 		return _instance;
 	}
-	virtual void doInit()
+	void doInit()
 	{
 
 	}

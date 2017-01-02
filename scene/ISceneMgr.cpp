@@ -49,21 +49,23 @@ namespace scene
 	{
 		IScene* scene = createScene();
 		IDevice* pDevice = getDeviceInstance();
-		sdmath::vec4 color(1, 1, 1, 1);
+		sdmath::vec4 color(1, 0, 1, 1);
+		const float factor = 0.1;
 		SimpleVertex vertex[4] =
 		{
-			SimpleVertex(sdmath::vec3(-1, 0, 1), color), SimpleVertex(sdmath::vec3(-1, 0, -1), color),\
-			SimpleVertex(sdmath::vec3(1, 0, -1), color), SimpleVertex(sdmath::vec3(1, 0, 1), color),
+			SimpleVertex(sdmath::vec3(-1 * factor, 1 * factor, 0.1), color), SimpleVertex(sdmath::vec3(-1 * factor, -1 * factor, 0.1), color),\
+			SimpleVertex(sdmath::vec3(1 * factor, -1 * factor, 0.1), color), SimpleVertex(sdmath::vec3(1 * factor, 1 * factor, 0.1), color),
 		};
 		uint16_t index[6] = {
-			0, 3, 2,\
-			0, 2, 1
+			0, 2, 3,\
+			0, 1, 2
 		};
-		IModel* model = createModel(vertex, 4, index, 6, SimpleVertexHLSL::VS_INPUT_LAYOUT::input, 2, "../../shader/dx11/simpleVertex.hlsl", \
-				"../../shader/dx11/simpleVertex.hlsl", EST_SIMPLE);
+		IModel* model = createModel(vertex, 4, index, 6, SimpleVertexHLSL::VS_INPUT_LAYOUT::input, 2, "../../shader/dx11/simpleVertex_vs.hlsl", \
+				"../../shader/dx11/simpleVertex_ps.hlsl", EST_SIMPLE);
 		scene->addModel(model);
 		vec2 windowSize = pDevice->getWindowSize();
 		ICamera* camera = createCamera(3.1415 / 2, windowSize[1] / windowSize[0], 1, 1000);
 		scene->addCamera(camera);
+		camera->translate(0, 0, -3);
 	}
 }

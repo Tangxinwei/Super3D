@@ -6,4 +6,5 @@ void MemPool::releaseAll()
 	{
 		d->Release();
 	}
+	data.clear();
 }

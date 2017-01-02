@@ -63,5 +63,7 @@ namespace render
 		virtual IPixelShader* createPixelShader(const char* filename, const char* entryname);
 		virtual void setVSShader(IVertexShader* vs);
 		virtual void setPSShader(IPixelShader* ps);
+		virtual sdmath::mat4 convertMatrixToShaderResourceMatrix(sdmath::mat4& original);
+		virtual void vsSetContentBuffers(IVertexShader* vs, vector<IBuffer*>& buffers, int start, int number);
 	};
 }

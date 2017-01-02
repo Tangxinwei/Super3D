@@ -9,6 +9,8 @@
 #include "IVertexShader.h"
 #include "IPixelShader.h"
 #include "IBuffer.h"
+#include <vector>
+using namespace std;
 namespace render
 {
 	class IDevice : public SDObject
@@ -30,6 +32,8 @@ namespace render
 			virtual IPixelShader* createPixelShader(const char* filename, const char* entryname) = 0;
 			virtual void setVSShader(IVertexShader* vs) = 0;
 			virtual void setPSShader(IPixelShader* ps) = 0; 
+			virtual sdmath::mat4 convertMatrixToShaderResourceMatrix(sdmath::mat4& original) = 0;
+			virtual void vsSetContentBuffers(IVertexShader* vs, vector<IBuffer*>& buffers, int start, int number) = 0;
 	};
 
 	IDevice* createDevice(CCreationParams& params);
