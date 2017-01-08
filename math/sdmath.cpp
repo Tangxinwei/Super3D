@@ -26,6 +26,18 @@ namespace sdmath
 
 	mat4 perspective(float fov, float aspect, float near, float far)
 	{
-		return glm::perspective(fov, aspect, near, far);
+		mat4 ret(0);
+		float halfCot = 1.0 / tan(fov / 2);
+		ret[0][0] = halfCot / aspect;
+		ret[1][1] = halfCot;
+		ret[2][2] = far / (far - near);
+		ret[3][2] = far * near / (near - far);
+		ret[2][3] = 1.0f;
+		return ret;
 	}	
+
+	mat4 scale(mat4& mat, vec3& v)
+	{
+		return glm::scale(mat, v);
+	}
 }

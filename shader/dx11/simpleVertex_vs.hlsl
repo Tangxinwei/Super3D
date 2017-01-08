@@ -19,7 +19,7 @@ struct VS_OUTPUT
 VS_OUTPUT vs_main(VS_INPUT input)
 {
 	VS_OUTPUT output;
-	output.position = input.position;//mul(input.position, g_worldViewProjection);
+	output.position = mul(g_worldViewProjection, input.position);
 	output.color = input.color;
 	return output;
 }

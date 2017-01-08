@@ -50,7 +50,7 @@ namespace scene
 		IScene* scene = createScene();
 		IDevice* pDevice = getDeviceInstance();
 		sdmath::vec4 color(1, 0, 1, 1);
-		const float factor = 0.1;
+		const float factor = 1.0;
 		SimpleVertex vertex[4] =
 		{
 			SimpleVertex(sdmath::vec3(-1 * factor, 1 * factor, 0.1), color), SimpleVertex(sdmath::vec3(-1 * factor, -1 * factor, 0.1), color),\
@@ -63,8 +63,9 @@ namespace scene
 		IModel* model = createModel(vertex, 4, index, 6, SimpleVertexHLSL::VS_INPUT_LAYOUT::input, 2, "../../shader/dx11/simpleVertex_vs.hlsl", \
 				"../../shader/dx11/simpleVertex_ps.hlsl", EST_SIMPLE);
 		scene->addModel(model);
+		model->rotateZ(3.1415926 / 8);
 		vec2 windowSize = pDevice->getWindowSize();
-		ICamera* camera = createCamera(3.1415 / 2, windowSize[1] / windowSize[0], 1, 1000);
+		ICamera* camera = createCamera(3.1415 / 2, windowSize[0] / windowSize[1], 1, 1000);
 		scene->addCamera(camera);
 		camera->translate(0, 0, -3);
 	}
