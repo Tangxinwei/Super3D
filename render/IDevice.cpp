@@ -16,7 +16,9 @@ namespace render
 		IDevice* device = NULL;
 		if (params.deviceType == DT_DX11)
 		{
+#ifdef _WINDOWS
 			device = new D3D11Device;
+#endif
 		}
 		if (device)
 		{

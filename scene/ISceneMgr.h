@@ -9,6 +9,7 @@
 #include "IScene.h"
 #include "IModel.h"
 #include "ICamera.h"
+#include "input\IInput.h"
 using namespace render;
 using namespace std;
 
@@ -34,6 +35,8 @@ namespace scene
 
 		void update()
 		{
+			InputEventDevice* input = getInputEventDeviceInstance();
+			input->updateState();
 			MemPool::getInstance()->releaseAll();
 			for (IScene* scene : sceneList)
 				scene->update();

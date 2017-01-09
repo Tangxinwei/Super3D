@@ -8,6 +8,7 @@
 #include <render\IVertexShader.h>
 #include <render\IPixelShader.h>
 #include "IEntity.h"
+#include <input\IInput.h>
 using namespace render;
 namespace scene
 {
@@ -15,11 +16,17 @@ namespace scene
 	class ICamera : public IEntity
 	{
 	protected:
-		float fov, aspect, near, far;
+		float fov, aspect, nearplane, farplane;
 	public:
-		ICamera(float f, float a, float n, float fa) : fov(f), aspect(a), near(n), far(fa)
+		ICamera(float f, float a, float n, float fa) : fov(f), aspect(a), nearplane(n), farplane(fa)
 		{
 			
+		}
+		void update()
+		{
+			InputEventDevice* input = getInputEventDeviceInstance();
+			if (input->checkKeyIsDown(DIK_A))
+				this->translate(0, 0, 0.1);
 		}
 		void render()
 		{
@@ -29,7 +36,7 @@ namespace scene
 
 		mat4 getProjectionMatrix()
 		{
-			return sdmath::perspective(fov, aspect, near, far);
+			return sdmath::perspective(fov, aspect, nearplane, farplane);
 		}
 	};
 }

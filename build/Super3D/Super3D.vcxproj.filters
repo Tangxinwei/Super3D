@@ -61,6 +61,15 @@
     <Filter Include="Source Files\common">
       <UniqueIdentifier>{f2971afe-3938-4e08-9135-a5d38142585a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\input">
+      <UniqueIdentifier>{893e937b-2a07-430c-918c-6db145306732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\input\D3D11">
+      <UniqueIdentifier>{9c8094bf-37c2-43cb-a991-e9c694a3f354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\input">
+      <UniqueIdentifier>{60960281-cd26-4bdb-a36c-ab3d716adacc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\SDObject.h">
@@ -144,6 +153,12 @@
     <ClInclude Include="..\..\util\Function.hpp">
       <Filter>Header Files\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\input\IInput.h">
+      <Filter>Header Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\input\D3D11\DirectXInput.h">
+      <Filter>Header Files\input\D3D11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp">
@@ -205,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="..\..\common\SDObject.cpp">
       <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\input\IInput.cpp">
+      <Filter>Source Files\input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

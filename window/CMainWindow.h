@@ -28,3 +28,6 @@ public:
 		}
 	}
 };
+
+CMainWindow* createMainWindow(render::DeviceType dt);
+CMainWindow* getMainWindowInstance();

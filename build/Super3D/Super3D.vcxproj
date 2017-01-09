@@ -73,6 +73,7 @@
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
     <IncludePath>$(DXSDK_DIR)\Include;$(ProjectDir)\..\..\3rd;$(ProjectDir)\..\..;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)..\..\bin\win32\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -81,6 +82,7 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
     <IncludePath>$(DXSDK_DIR)\Include;$(ProjectDir)\..\..\3rd;$(ProjectDir)\..\..;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)..\..\bin\win32\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,8 +98,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;d3dx11.lib;dxerr.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(ProjectDir)..\..\bin\win32\$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>d3d11.lib;d3dx11.lib;dxerr.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -157,6 +159,8 @@
     <ClInclude Include="..\..\common\CCreationParams.h" />
     <ClInclude Include="..\..\common\CommonType.h" />
     <ClInclude Include="..\..\common\SDObject.h" />
+    <ClInclude Include="..\..\input\D3D11\DirectXInput.h" />
+    <ClInclude Include="..\..\input\IInput.h" />
     <ClInclude Include="..\..\math\sdmath.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11Buffer.h" />
     <ClInclude Include="..\..\render\D3D11\D3D11CommonType.h" />
@@ -184,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\SDObject.cpp" />
+    <ClCompile Include="..\..\input\IInput.cpp" />
     <ClCompile Include="..\..\math\sdmath.cpp" />
     <ClCompile Include="..\..\render\D3D11\D3D11Device.cpp" />
     <ClCompile Include="..\..\render\D3D11\D3D11VertexBuff.cpp" />

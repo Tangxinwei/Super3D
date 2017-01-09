@@ -1,14 +1,11 @@
 #include <window\CMainWindow.h>
-
-#ifdef _WINDOWS
-	#include <window\win\CMainWindowForWindows.h>
-#endif
-
+#include <input\IInput.h>
 #include <common\CCreationParams.h>
 
 int main()
 {
-	CMainWindow* main = new CMainWindowForWindows;
+	CMainWindow* main = createMainWindow(render::DT_DX11);
+	createInputEventDevice(render::DT_DX11);
 	CCreationParams params;
 	params.windowHandler = main->getWindowHandler();
 	main->initWindow(params);

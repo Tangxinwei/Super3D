@@ -35,6 +35,8 @@ namespace scene
 	}
 	void IScene::update() 
 	{
+		if (camera)
+			camera->update();
 	}
 
 	void IScene::render()
