@@ -21,6 +21,10 @@ namespace scene
 		IPixelShader* pPixelShader;
 	public:
 		IModel(IVertexBuff* v, IVertexIndexBuff* pI, IVertexShader* pVS, IPixelShader* pPS);
+		virtual void update(float dt)
+		{
+
+		}
 		void render();
 		virtual ~IModel();
 	};

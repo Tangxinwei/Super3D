@@ -24,6 +24,7 @@ namespace scene
 		void setPosition(float x, float y, float z);
 		sdmath::mat4 getWorldTransform() { return transform; }
 		sdmath::vec3 getPosition();
+		virtual void update(float dt) = 0;
 		void rotate(sdmath::vec3& axis, float angle);
 		void rotateX(float angle) { rotate(sdmath::vec3(1, 0, 0), angle); }
 		void rotateY(float angle) { rotate(sdmath::vec3(0, 1, 0), angle); }

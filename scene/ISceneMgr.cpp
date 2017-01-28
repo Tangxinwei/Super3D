@@ -40,7 +40,7 @@ namespace scene
 
 	ICamera* ISceneMgr::createCamera(float fov, float aspect, float near, float far)
 	{
-		ICamera* camera = new ICamera(fov, aspect, near, far);
+		ICamera* camera = new MoveCamera(2, fov, aspect, near, far);
 		camera->autoRelease();
 		return camera;
 	}

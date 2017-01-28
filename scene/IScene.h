@@ -26,7 +26,7 @@ namespace scene
 		~IScene();
 		bool addModel(IModel* model);
 		bool addCamera(ICamera* camera);
-		void update();
+		void update(float dt);
 		void render();
 	};
 }

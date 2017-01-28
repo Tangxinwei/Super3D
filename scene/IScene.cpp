@@ -33,10 +33,10 @@ namespace scene
 		camera->onAddToScene(this);
 		return true;
 	}
-	void IScene::update() 
+	void IScene::update(float dt) 
 	{
 		if (camera)
-			camera->update();
+			camera->update(dt);
 	}
 
 	void IScene::render()

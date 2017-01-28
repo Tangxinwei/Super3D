@@ -23,13 +23,16 @@ namespace sdmath
 		use B to note for the translate transform of vector v, and then
 		C = translate(A, v) equals with C = A * B
 
-		we use right-hand coordinate system
+		we use left-hand coordinate system
 	*/
 	mat4 transpose(mat4& mat);
 	mat4 translate(mat4& mat, vec3& v);
 	mat4 rotate(mat4& mat, float& angle, vec3& axis);
 	mat4 scale(mat4& mat, vec3& v);
 	mat4 inverse(mat4& mat);
+	vec3 get_x_axis(mat4& mat);
+	vec3 get_y_axis(mat4& mat);
+	vec3 get_z_axis(mat4& mat);
 	//返回的z值在0-1
 	mat4 perspective(float fov, float aspect, float near, float far);
 

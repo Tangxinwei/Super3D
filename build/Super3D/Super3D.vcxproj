@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\common\CCreationParams.h" />
     <ClInclude Include="..\..\common\CommonType.h" />
+    <ClInclude Include="..\..\common\CTimer.h" />
     <ClInclude Include="..\..\common\SDObject.h" />
     <ClInclude Include="..\..\input\D3D11\DirectXInput.h" />
     <ClInclude Include="..\..\input\IInput.h" />

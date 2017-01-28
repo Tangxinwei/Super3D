@@ -33,13 +33,13 @@ namespace scene
 		ICamera* createCamera(float fov, float aspect, float near, float far);
 		IScene* createScene();
 
-		void update()
+		void update(float dt)
 		{
 			InputEventDevice* input = getInputEventDeviceInstance();
 			input->updateState();
 			MemPool::getInstance()->releaseAll();
 			for (IScene* scene : sceneList)
-				scene->update();
+				scene->update(dt);
 		}
 		void render()
 		{

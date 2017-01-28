@@ -2,6 +2,7 @@
 #include <common\CCreationParams.h>
 #include <render\IDevice.h>
 #include <scene\ISceneMgr.h>
+#include <common\CTimer.h>
 class CMainWindow
 {
 protected:
@@ -23,7 +24,10 @@ public:
 		while (this->run())
 		{
 			scene::ISceneMgr* pSceneMgr = scene::ISceneMgr::getInstance();
-			pSceneMgr->update();
+			FrameTimer* t = FrameTimer::getInstance();
+			t->update();
+			float dt = float(t->getFrameDeltaTime()) / 1000.0;
+			pSceneMgr->update(dt);
 			pSceneMgr->render();
 		}
 	}

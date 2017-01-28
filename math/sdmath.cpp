@@ -40,4 +40,20 @@ namespace sdmath
 	{
 		return glm::scale(mat, v);
 	}
+
+	vec3 get_x_axis(mat4& mat)
+	{
+		vec4& ret = mat[0];
+		return vec3(ret.x, ret.y, ret.z);
+	}
+	vec3 get_y_axis(mat4& mat)
+	{
+		vec4& ret = mat[1];
+		return vec3(ret.x, ret.y, ret.z);
+	}
+	vec3 get_z_axis(mat4& mat)
+	{
+		vec4& ret = mat[2];
+		return vec3(ret.x, ret.y, ret.z);
+	}
 }

@@ -159,6 +159,9 @@
     <ClInclude Include="..\..\input\D3D11\DirectXInput.h">
       <Filter>Header Files\input\D3D11</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\CTimer.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\math\sdmath.cpp">
